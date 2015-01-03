@@ -1,4 +1,4 @@
 Bringing-Sexy-Backgammon
 ========================
 
-Backgammon game and AI.
+*Backgammon game and AI.*
