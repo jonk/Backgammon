@@ -48,7 +48,7 @@ class Board(object):
         return False
 
 
-    # DOUBLES AND JAIL
+    # DOUBLES AND JAIL AND EATING TODO ALSO CLEAN THIS SHIT UP JON TOFUCKINGDO ABSTRACT AWAY EVERYTHING
     def validMoves(self, player, roll):
         moves = []
         if player == Players.White:
@@ -61,7 +61,7 @@ class Board(object):
             temp_dict = dict.copy()
             temp_opponent_dict = opponentDict.copy()
             if temp_dict[i] > 0:
-                # if there isn't more than 2 on the black side
+                # if there isn't more than 2 on the opponent side
                 if (23 - (i + roll[0])) in temp_opponent_dict and temp_opponent_dict[23 - (i + roll[0])] < 2:
                     temp_dict[i] -= 1
                     temp_dict[(i + roll[0])] += 1
@@ -77,7 +77,7 @@ class Board(object):
             temp_dict = dict.copy()
             temp_opponent_dict = opponentDict.copy()
             if temp_dict[i] > 0:
-                # if there isn't more than 2 on the black side
+                # if there isn't more than 2 on the opponent side
                 if (23 - (i + roll[1])) in temp_opponent_dict and temp_opponent_dict[23 - (i + roll[1])] < 2:
                     temp_dict[i] -= 1
                     temp_dict[(i + roll[1])] += 1
@@ -92,5 +92,3 @@ class Board(object):
 
 
         
-b = Board()
-print b.validMoves(Players.Black, (5, 5))
