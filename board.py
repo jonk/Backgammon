@@ -124,12 +124,11 @@ class Board(object):
         else:
             self.newValidMovesHelper(player, rolls, [], total_moves)
 
-        print total_moves
+        # print total_moves
         return total_moves
 
 
-    # MADE outer function to call this as helper
-
+    # Made outer function to call this as helper
     def newValidMovesHelper(self, player, rolls, cur_moves, total_moves):
         if player == Players.White:
             dict = self.whiteDict
@@ -161,9 +160,49 @@ class Board(object):
                 return
 
 
+    #Piece position, checks whether a piece is at the given position
+    def pP(self, col, row):
+        whiteCol = self.whiteDict[col]
+        blackCol = self.blackDict[23 - col]
+        if whiteCol > blackCol:
+            if (whiteCol > 5 and row == 0):
+                return whiteCol
+            elif (whiteCol > row and whiteCol <= 5):
+                return "+"
+        else:
+            if (blackCol > 5 and row == 0):
+                return blackCol
+            elif (blackCol > row and blackCol <= 5):
+                return "#"
+        return " "
+
+    #Helper to print the board
+    def printBoard(self):
+        print       "+ - - - - - - || - - - - - - +\n" \
+              "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
+              "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
+              "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
+              "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
+              "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
+                    "|-------------||-------------|\n" \
+              "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
+              "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
+              "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
+              "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
+              "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
+                    "+ - - - - - - || - - - - - - +".format(
+            self.pP(12, 0), self.pP(13, 0), self.pP(14, 0), self.pP(15, 0), self.pP(16, 0), self.pP(17, 0), self.pP(18, 0), self.pP(19, 0), self.pP(20, 0), self.pP(21, 0), self.pP(22, 0), self.pP(23, 0),
+            self.pP(12, 1), self.pP(13, 1), self.pP(14, 1), self.pP(15, 1), self.pP(16, 1), self.pP(17, 1), self.pP(18, 1), self.pP(19, 1), self.pP(20, 1), self.pP(21, 1), self.pP(22, 1), self.pP(23, 1),
+            self.pP(12, 2), self.pP(13, 2), self.pP(14, 2), self.pP(15, 2), self.pP(16, 2), self.pP(17, 2), self.pP(18, 2), self.pP(19, 2), self.pP(20, 2), self.pP(21, 2), self.pP(22, 2), self.pP(23, 2),
+            self.pP(12, 3), self.pP(13, 3), self.pP(14, 3), self.pP(15, 3), self.pP(16, 3), self.pP(17, 3), self.pP(18, 3), self.pP(19, 3), self.pP(20, 3), self.pP(21, 3), self.pP(22, 3), self.pP(23, 3),
+            self.pP(12, 4), self.pP(13, 4), self.pP(14, 4), self.pP(15, 4), self.pP(16, 4), self.pP(17, 4), self.pP(18, 4), self.pP(19, 4), self.pP(20, 4), self.pP(21, 4), self.pP(22, 4), self.pP(23, 4), 
+            self.pP(11, 4), self.pP(10, 4), self.pP(9, 4), self.pP(8, 4), self.pP(7, 4), self.pP(6, 4),self.pP(5, 4), self.pP(4, 4), self.pP(3, 4), self.pP(2, 4), self.pP(1, 4), self.pP(0, 4),
+            self.pP(11, 3), self.pP(10, 3), self.pP(9, 3), self.pP(8, 3), self.pP(7, 3), self.pP(6, 3),self.pP(5, 3), self.pP(4, 3), self.pP(3, 3), self.pP(2, 3), self.pP(1, 3), self.pP(0, 3),
+            self.pP(11, 2), self.pP(10, 2), self.pP(9, 2), self.pP(8, 2), self.pP(7, 2), self.pP(6, 2),self.pP(5, 2), self.pP(4, 2), self.pP(3, 2), self.pP(2, 2), self.pP(1, 2), self.pP(0, 2),
+            self.pP(11, 1), self.pP(10, 1), self.pP(9, 1), self.pP(8, 1), self.pP(7, 1), self.pP(6, 1),self.pP(5, 1), self.pP(4, 1), self.pP(3, 1), self.pP(2, 1), self.pP(1, 1), self.pP(0, 1),
+            self.pP(11, 0), self.pP(10, 0), self.pP(9, 0), self.pP(8, 0), self.pP(7, 0), self.pP(6, 0),self.pP(5, 0), self.pP(4, 0), self.pP(3, 0), self.pP(2, 0), self.pP(1, 0), self.pP(0, 0))
+
 b = Board()
-b.newValidMoves(Players.White, [5, 5])
-
-
+b.printBoard()
 
         
