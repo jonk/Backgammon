@@ -18,11 +18,13 @@ class Board(object):
         while i < 25:
             board[i] = 0
             i += 1
-        board[0] = 2
-        board[11] = 5
-        board[16] = 3
-        board[18] = 5
-        board[-1] = 2
+        #board[0] = 2
+        #board[11] = 5
+        #board[16] = 3
+        #board[18] = 5
+        #board[-1] = 2
+        board[20] = 1
+        board[21] = 1
 
     def movePiece(self, start, dest, player):
         if player == Players.Black:
@@ -124,7 +126,7 @@ class Board(object):
         else:
             self.newValidMovesHelper(player, rolls, [], total_moves)
 
-        # print total_moves
+        print total_moves
         return total_moves
 
 
@@ -138,13 +140,13 @@ class Board(object):
             opponent_dict = self.whiteDict
 
         for roll in rolls:
-            for pos in range(24 - roll):
+            for pos in range(25 - roll):
                 new_dict = dict.copy()
                 new_opponent_dict = opponent_dict.copy()
                 for move in cur_moves:
                     new_dict[move[0]] -= 1
                     new_dict[move[1]] += 1
-                if new_dict[pos] > 0 and new_opponent_dict[23 - (pos + roll)] < 2:
+                if new_dict[pos] > 0 and new_opponent_dict[23 - (pos + roll)] < 2 and (pos + roll) < 24:
                     if len(rolls) == 1:
                         new_moves = list(cur_moves)
                         new_moves.append((pos, pos + roll))
@@ -156,9 +158,40 @@ class Board(object):
                         new_moves = list(cur_moves)
                         new_moves.append((pos, pos + roll))
                         self.newValidMovesHelper(player, new_rolls, new_moves, total_moves)
+                elif self.isEating(new_dict) and pos + roll >= 24:
+                    while new_dict[pos] == 0 and self.helper(new_dict, roll):
+                        pos += 1
+                        if pos > 23:
+                            break
+                    if new_dict[pos] > 0:
+                        move = (pos, 24)
+                        if len(rolls) == 1:
+                            new_moves = list(cur_moves)
+                            new_moves.append(move)
+                            if new_moves not in total_moves:
+                                total_moves.append(new_moves)
+                        else:
+                            new_rolls = list(rolls)
+                            new_rolls.remove(roll)
+                            new_moves = list(cur_moves)
+                            new_moves.append(move)
+                            self.newValidMovesHelper(player, new_rolls, new_moves, total_moves)               
             if len(rolls) == 1:
                 return
 
+    def isEating(self, dict):
+        i = -1
+        while i < 18:
+            if dict[i] > 0:
+                return False
+            i += 1
+        return True
+
+    def helper(self, dict, roll):
+        for i in range(18, 24 - roll):
+            if dict[i] > 0:
+                return False
+        return True
 
     #Piece position, checks whether a piece is at the given position
     def pP(self, col, row):
@@ -204,5 +237,6 @@ class Board(object):
 
 b = Board()
 b.printBoard()
+b.newValidMoves(Players.White, (4, 2))
 
         
