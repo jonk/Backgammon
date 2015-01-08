@@ -4,6 +4,12 @@ import string
 
 class UserAgent(Agent):
     """User agent that takes moves from the command line"""
+    def __init__(self, player):
+        self.num = player
+        if player == 1:
+            self.name = "White"
+        else:
+            self.name = "Black"
 
     "Takes in format of 'start dest' ex. 1 3 12 15, on roll (2, 3)"
     def choose_move(self, validMoves=()): 

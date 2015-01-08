@@ -18,29 +18,30 @@ class Board(object):
         while i < 25:
             board[i] = 0
             i += 1
-        #board[0] = 2
-        #board[11] = 5
-        #board[16] = 3
-        #board[18] = 5
-        #board[-1] = 2
-        board[20] = 1
-        board[21] = 1
+        board[0] = 2
+        board[11] = 5
+        board[16] = 3
+        board[18] = 5
+        # board[-1] = 2
+        # board[20] = 1
+        # board[21] = 1
 
-    def movePiece(self, start, dest, player):
-        if player == Players.Black:
-            self.blackDict[start] -= 1
-            self.blackDict[dest] += 1
-            if self.whiteDict[dest] == 1:
-                self.whiteDict[dest] = 0
-                self.whiteDict[-1] += 1
-        elif player == Players.White:
-            self.whiteDict[start] -= 1
-            self.whiteDict[dest] += 1
-            if self.blackDict[dest] == 1:
-                self.blackDict[dest] = 0
-                self.blackDict[-1] += 1
-        else:
-            print "u r a dumdum"
+    def movePiece(self, move, player):
+        for i in range(len(move)):
+            if player == Players.Black:
+                self.blackDict[move[i][0]] -= 1
+                self.blackDict[move[i][1]] += 1
+                if self.whiteDict[move[i][1]] == 1:
+                    self.whiteDict[move[i][1]] = 0
+                    self.whiteDict[-1] += 1
+            elif player == Players.White:
+                self.whiteDict[move[i][0]] -= 1
+                self.whiteDict[move[i][1]] += 1
+                if self.blackDict[move[i][1]] == 1:
+                    self.blackDict[move[i][1]] = 0
+                    self.blackDict[-1] += 1
+            else:
+                print "u r a dumdum"
 
     def isGameOver(self):
         if self.whiteDict[24] == 15:
@@ -56,8 +57,6 @@ class Board(object):
             return True
         return False
 
-
-    #TODO Eating valid moves
 
     def newValidMoves(self, player, rolls):
         total_moves = []
@@ -126,7 +125,6 @@ class Board(object):
         else:
             self.newValidMovesHelper(player, rolls, [], total_moves)
 
-        print total_moves
         return total_moves
 
 
@@ -212,8 +210,8 @@ class Board(object):
     #Helper to print the board
     def printBoard(self):
         print       "+ - - - - - - || - - - - - - +\n" \
-              "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
-              "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
+              "| {} {} {} {} {} {} || {} {} {} {} {} {} |    + == White\n" \
+              "| {} {} {} {} {} {} || {} {} {} {} {} {} |    # == Black\n" \
               "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
               "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
               "| {} {} {} {} {} {} || {} {} {} {} {} {} |\n" \
@@ -235,8 +233,5 @@ class Board(object):
             self.pP(11, 1), self.pP(10, 1), self.pP(9, 1), self.pP(8, 1), self.pP(7, 1), self.pP(6, 1),self.pP(5, 1), self.pP(4, 1), self.pP(3, 1), self.pP(2, 1), self.pP(1, 1), self.pP(0, 1),
             self.pP(11, 0), self.pP(10, 0), self.pP(9, 0), self.pP(8, 0), self.pP(7, 0), self.pP(6, 0),self.pP(5, 0), self.pP(4, 0), self.pP(3, 0), self.pP(2, 0), self.pP(1, 0), self.pP(0, 0))
 
-b = Board()
-b.printBoard()
-b.newValidMoves(Players.White, (4, 2))
 
         
