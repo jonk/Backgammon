@@ -21,18 +21,19 @@ class Game(object):
             print "{}'s Turn!".format(cur_player.name)
             rolls = [self.roll(), self.roll()]
             print rolls
-            possible_moves = self.gameBoard.newValidMoves(cur_player.num, rolls)
+            possible_moves = self.gameBoard.newValidMoves(cur_player.id, rolls)
             self.gameBoard.printBoard()
             move = cur_player.choose_move()
             while move not in possible_moves:
                 print "Not a valid move! Try Again"
+                print possible_moves
                 move = cur_player.choose_move()
-            self.gameBoard.movePiece(move, cur_player.num)
+            self.gameBoard.movePiece(move, cur_player.id)
             if self.gameBoard.isGameOver():
                 print "{} is the Winner!".format(cur_player.name)
-                return
+                return 
             self.gameBoard.printBoard()
-            if cur_player.num == Players.White:
+            if cur_player.id == Players.White:
                 cur_player = self.blackPlayer
             else:
                 cur_player = self.whitePlayer

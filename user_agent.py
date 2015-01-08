@@ -5,7 +5,7 @@ import string
 class UserAgent(Agent):
     """User agent that takes moves from the command line"""
     def __init__(self, player):
-        self.num = player
+        self.id = player
         if player == 1:
             self.name = "White"
         else:

@@ -18,13 +18,13 @@ class Board(object):
         while i < 25:
             board[i] = 0
             i += 1
-        board[0] = 2
-        board[11] = 5
-        board[16] = 3
-        board[18] = 5
+        # board[0] = 2
+        # board[11] = 5
+        # board[16] = 3
+        # board[18] = 5
         # board[-1] = 2
-        # board[20] = 1
-        # board[21] = 1
+        board[20] = 1
+        board[21] = 1
 
     def movePiece(self, move, player):
         for i in range(len(move)):
